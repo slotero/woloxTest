@@ -44,11 +44,8 @@ public class AlbumActionServiceImplement implements InterfaceAlbumActionService 
     @Override
     public Optional<List<AlbumActions>> findByAlbumIdAndActions(Long albumId, Action action) {
         Optional<List<AlbumActions>> result;
-        if (action == READ)
-            result = albumActionsRepository.findByAlbumIdAndRead(albumId, true);
-        else {
-            result = albumActionsRepository.findByAlbumIdAndWrite(albumId, true);
-        }
-        return result;
+        return (action == READ)
+                ?albumActionsRepository.findByAlbumIdAndRead(albumId, true)
+                :albumActionsRepository.findByAlbumIdAndWrite(albumId, true);
     }
 }
